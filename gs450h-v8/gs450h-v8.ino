@@ -210,6 +210,8 @@ void setup() {
   Serial1.begin(250000); // Inverter
   Serial2.begin(115200); // Wifi Module
 
+  Serial.begin(9600); // Start serial communication for regular console ouput (only for testing purposes)
+
   // I don't know what these magic constants do, but I assume
   // they are necessary for the sync serial port to work.
   PIOA->PIO_ABSR |= 1 << 17;
@@ -337,6 +339,21 @@ void choose_ratio() {
 }
 
 void loop() {
+  // Read the brake & throttle input (only for testing purposes)
+  brakeState = digitalRead(PIN_BRAKE_IN);
+  throttleState1 = digitalRead(PIN_THROTTLE1);
+  throttleState2 = digitalRead(PIN_THROTTLE2);
+
+  // Print the brake and throttle inputs to the console (only for testing purposes)
+  Serial.print("Brake input state: ");
+  Serial.print(brakeState);
+
+  Serial.println("Throttle sensor 1 state: ");
+  Serial.print(throttleState1);
+
+  Serial.println("Throttle sensor 2 state: ");
+  Serial.print(throttleState2);
+
   // If we're not precharged yet, prepare to close contactor.
   if (!precharge_complete) precharge();
 
