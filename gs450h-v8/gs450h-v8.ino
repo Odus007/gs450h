@@ -45,7 +45,7 @@ Metro inverter_timer = Metro(2);
 #define PIN_TRANS_PB3     42  // Oil pressure sensor, displayed in web interface, otherwise unused
 
 #define PIN_THROTTLE1     A0  // Throttle 1 input.
-#define PIN_THROTTLE2     A1  // Throttle 2 input, not yet used
+#define PIN_THROTTLE2     A1  // Throttle 2 input, not yet used (in testing right now)
 
 #define PIN_OIL_PUMP_TEMP A7  // Temperature sensor, not yet used
 #define PIN_TRANS_TEMP    A4  // Temperature sensor, not yet used
