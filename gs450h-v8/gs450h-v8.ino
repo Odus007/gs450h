@@ -20,7 +20,7 @@
 // A timer to periodically poll the inverter for status data
 Metro inverter_timer = Metro(2);
 
-// These numbers don't mhave any special meaning, they're just labels for convenience.
+// These numbers don't have any special meaning, they're just labels for convenience.
 #define REVERSE 1
 #define NEUTRAL 2
 #define DRIVE   3
@@ -129,6 +129,14 @@ void calculate_torque()
   // Check if throttle sensors are healthy
   if (!checkThrottleSensors()) {
     // If sensors are not within tolerance, set torque to zero and exit function
+    mg1_torque = 0;
+    mg2_torque = 0;
+    return; // Exit the function early
+  }
+
+  // Check if brake pedal is pressed
+  if (digitalRead(PIN_BRAKE_IN)) {
+    // If brake pedal is pressed, set torque to zero and exit function
     mg1_torque = 0;
     mg2_torque = 0;
     return; // Exit the function early
