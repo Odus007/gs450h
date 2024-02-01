@@ -26,7 +26,7 @@ Metro inverter_timer = Metro(2);
 #define DRIVE   3
 
 // Define pin mappings
-#define PIN_LED            13 // Just an LED
+#define PIN_LED            13 // Just a LED
 #define PIN_REQ            22 // Requests status data from inverter
 #define PIN_OUT1           50 // This pin is used to close the main contactor
 #define PIN_OIL_PUMP_PWM    2 // Oil pump speed control
