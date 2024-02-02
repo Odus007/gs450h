@@ -65,7 +65,7 @@ Metro inverter_timer = Metro(2);
 struct {
   uint16_t version;
   uint16_t precharge_voltage;
-  uint16_t max_torque_fwd;
+  uint16_t max_torque_fwd = 200;
   uint16_t max_torque_rev;
   uint16_t pedal_min;
   uint16_t pedal_max;
