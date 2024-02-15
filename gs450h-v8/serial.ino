@@ -77,6 +77,10 @@ int32_t get_config(char* name) {
     return digitalRead(PIN_TRANS_PB3);
   } else if(!strcmp(name, "throttle1")) {
     return analogRead(PIN_THROTTLE1);
+  } else if(!strcmp(name, "throttle2")) {
+    return analogRead(PIN_THROTTLE2);
+  } else if(!strcmp(name, "brake_in")) {
+    return analogRead(PIN_BRAKE_IN);
   } else if(!strcmp(name, "mg1_torque")) {
     return mg1_torque;
   } else if(!strcmp(name, "mg2_torque")) {
@@ -109,6 +113,7 @@ void send_json(Stream &port) {
   send_json_value(port, "trans_pb2",                        "",     digitalRead(PIN_TRANS_PB2));                port.print(",");
   send_json_value(port, "trans_pb3",                        "",     digitalRead(PIN_TRANS_PB3));                port.print(",");
   send_json_value(port, "throttle1",                        "",     analogRead(PIN_THROTTLE1));                 port.print(",");
+  send_json_value(port, "throttle2",                        "",     analogRead(PIN_THROTTLE2));                 port.print(",");
   send_json_value(port, "brake_in",                         "",     analogRead(PIN_BRAKE_IN));                  port.print(",");
   send_json_value(port, "mg1_torque",                       "",     mg1_torque);                                port.print(",");
   send_json_value(port, "mg2_torque",                       "",     mg2_torque);                                port.print(",");
