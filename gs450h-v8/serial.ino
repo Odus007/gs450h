@@ -135,6 +135,7 @@ void process_serial(Stream &port, char* buffer) {
   char* cmd = strtok(buffer, " ");
   if(!strcmp(cmd, "json")) {
     send_json(port);
+    port.print("\r\n");
   } else if(!strcmp(cmd, "save")) {
     EEPROM.write(0, config);
     port.println("OK - config saved.");
@@ -154,9 +155,17 @@ void process_serial(Stream &port, char* buffer) {
     while(param_name = strtok(NULL, ",")) {
       int32_t param_value = get_config(param_name);
       port.print(param_value);
-      port.print(".0");
-      port.print("\r\n");
+      port.println(".0");
     }
+  } else if(!strcmp(cmd, "pedals")) {
+    port.print("Throttle1: ");
+    port.println(analogRead(PIN_THROTTLE1));
+    port.print("Throttle2: ");
+    port.println(analogRead(PIN_THROTTLE2));
+    port.print("Brake: ");
+    port.println(analogRead(PIN_BRAKE_IN));
+  } else if(!strcmp(cmd, "?")) {
+    port.println("Commands: json, save, load, set, get, pedals, help");
   } else {
     port.println("Unknown command!");
   }
