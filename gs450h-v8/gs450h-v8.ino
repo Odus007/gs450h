@@ -66,7 +66,7 @@ struct {
   uint16_t version;
   uint16_t precharge_voltage;
   uint16_t max_torque_fwd = 200;
-  uint16_t max_torque_rev;
+  uint16_t max_torque_rev = 200;
   uint16_t pedal_min;
   uint16_t pedal_max;
   uint16_t regen_factor;
