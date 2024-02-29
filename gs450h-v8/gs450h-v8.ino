@@ -355,7 +355,7 @@ void loop() {
   // Serial.print(throttleState2);
 
   // If we're not precharged yet, prepare to close contactor.
-  if (!precharge_complete) precharge();
+  // if (!precharge_complete) precharge();
 
   // Poll the motor at regular intervals to request status frames
   poll_inverter();
