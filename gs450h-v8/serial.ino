@@ -175,8 +175,6 @@ void process_serial(Stream &port, char* buffer) {
     port.print("regen speed: ");
     port.println(regen_speed);
   } else if(!strcmp(cmd, "check")) {
-    port.print("precharge_complete (should be 1): ");
-    port.println(precharge_complete);
     port.print("inv_initialized (should be 1): ");
     port.println(inv_initialized);
     port.print("pedal_min config: ");

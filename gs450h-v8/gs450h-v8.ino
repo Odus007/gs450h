@@ -65,8 +65,8 @@ Metro inverter_timer = Metro(2);
 struct {
   uint16_t version;
   uint16_t precharge_voltage;
-  uint16_t max_torque_fwd = 200;
-  uint16_t max_torque_rev = 200;
+  uint16_t max_torque_fwd;
+  uint16_t max_torque_rev;
   uint16_t pedal_min;
   uint16_t pedal_max;
   uint16_t regen_factor;
@@ -144,7 +144,7 @@ void calculate_torque()
 
   uint8_t gear = get_gear();
   // Force neutral if the main contactor hasn't closed yet
-  if (!precharge_complete) gear = NEUTRAL;
+  // if (!precharge_complete) gear = NEUTRAL;
   // Normalize throttle 1 input to 0-1000
   int throttle = analogRead(PIN_THROTTLE1);
   throttle = map(throttle, config.pedal_min, config.pedal_max, 0, 1000);
@@ -189,7 +189,7 @@ void setup() {
   // Set defalt pin states
   digitalWrite(PIN_REQ, LOW);             // This initial state is unimportant
   digitalWrite(PIN_INV_POWER, HIGH);      // Turn on inverter
-  digitalWrite(PIN_OIL_PUMP_POWER, HIGH); // Begin HV precharge
+  // digitalWrite(PIN_OIL_PUMP_POWER, HIGH); // Begin HV precharge
   digitalWrite(PIN_OUT1, LOW);            // Turn off main contactor
   digitalWrite(PIN_TRANS_SL1, LOW);       // Turn off at startup.
   digitalWrite(PIN_TRANS_SL2, LOW);       // Turn off at startup.
@@ -229,7 +229,7 @@ void setup() {
   if (config.version != CONFIG_VERSION)
   {
     config.version = CONFIG_VERSION;
-    config.precharge_voltage = 2000;
+    // config.precharge_voltage = 2000;
     config.max_torque_fwd = 0;
     config.max_torque_rev = 0;
     config.pedal_min = 2000;
@@ -243,13 +243,13 @@ void setup() {
 }
 
 // Close the main contactor once inverter DC bus voltage reaches defined value.
-void precharge() {
-  if (inv_initialized && (dc_bus_voltage > config.precharge_voltage)) {
-    delay(500);
-    digitalWrite(PIN_OUT1, HIGH);
-    precharge_complete = 1;
-  }
-}
+// void precharge() {
+//   if (inv_initialized && (dc_bus_voltage > config.precharge_voltage)) {
+//     delay(500);
+//     digitalWrite(PIN_OUT1, HIGH);
+//     precharge_complete = 1;
+//   }
+// }
 
 // Send a control packet to the inverter to set the torque of MG1
 // and MG2 based on desired torque.
@@ -326,13 +326,13 @@ uint8_t monitor_inverter() {
 void choose_ratio() {
   if ( mg1_speed > 50) return;
   if (-mg1_speed > 50) return;
-  if (digitalRead(PIN_BRAKE_IN)) {
-    trans_sl1 = 1;
-    trans_sl2 = 1;
-  } else {
-    trans_sl1 = 0;
-    trans_sl2 = 0;
-  }
+  // if (digitalRead(PIN_BRAKE_IN)) {
+  //   trans_sl1 = 1;
+  //   trans_sl2 = 1;
+  // } else {
+  //   trans_sl1 = 0;
+  //   trans_sl2 = 0;
+  // }
   // Set gear ratio solenoids
   digitalWrite(PIN_TRANS_SL1, trans_sl1);
   digitalWrite(PIN_TRANS_SL2, trans_sl2);
