@@ -126,21 +126,21 @@ bool checkThrottleSensors() {
 // Based on gear and throttle position, calculate desired torque.
 void calculate_torque()
 {
-  // // Check if throttle sensors are healthy
-  // if (!checkThrottleSensors()) {
-  //   // If sensors are not within tolerance, set torque to zero and exit function
-  //   mg1_torque = 0;
-  //   mg2_torque = 0;
-  //   return; // Exit the function early
-  // }
+  // Check if throttle sensors are healthy
+  if (!checkThrottleSensors()) {
+    // If sensors are not within tolerance, set torque to zero and exit function
+    mg1_torque = 0;
+    mg2_torque = 0;
+    return; // Exit the function early
+  }
 
-  // // Check if brake pedal is pressed
-  // if (analogRead(PIN_BRAKE_IN) > 0) {
-  //   // If brake pedal is pressed, set torque to zero and exit function
-  //   mg1_torque = 0;
-  //   mg2_torque = 0;
-  //   return; // Exit the function early
-  // }
+  // Check if brake pedal is pressed
+  if (analogRead(PIN_BRAKE_IN) > 0) {
+    // If brake pedal is pressed, set torque to zero and exit function
+    mg1_torque = 0;
+    mg2_torque = 0;
+    return; // Exit the function early
+  }
 
   uint8_t gear = get_gear();
   // Force neutral if the main contactor hasn't closed yet

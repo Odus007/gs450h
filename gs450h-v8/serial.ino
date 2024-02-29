@@ -170,6 +170,19 @@ void process_serial(Stream &port, char* buffer) {
     port.println(mg2_torque);
     port.print("gear: ");
     port.println(get_gear());
+    port.print("regen: ");
+    port.println(regen);
+    port.print("regen speed: ");
+    port.println(regen_speed);
+  } else if(!strcmp(cmd, "check")) {
+    port.print("precharge_complete (should be 1): ");
+    port.println(precharge_complete);
+    port.print("inv_initialized (should be 1): ");
+    port.println(inv_initialized);
+    port.print("pedal_min config: ");
+    port.println(config.pedal_min);
+    port.print("pedal_max config: ");
+    port.println(config.pedal_max);
   } else if(!strcmp(cmd, "?")) {
     port.println("Commands: json, save, load, set, get, pedals, help");
   } else {
