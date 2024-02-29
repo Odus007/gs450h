@@ -164,6 +164,12 @@ void process_serial(Stream &port, char* buffer) {
     port.println(analogRead(PIN_THROTTLE2));
     port.print("Brake: ");
     port.println(analogRead(PIN_BRAKE_IN));
+    port.print("mg1 torque: ");
+    port.println(mg1_torque);
+    port.print("mg2 torque: ");
+    port.println(mg2_torque);
+    port.print("gear: ");
+    port.println(get_gear());
   } else if(!strcmp(cmd, "?")) {
     port.println("Commands: json, save, load, set, get, pedals, help");
   } else {
