@@ -164,8 +164,8 @@ void calculate_torque()
   else if (gear == REVERSE) torque = map(throttle, 0, 1000, regen, -config.max_torque_rev);
   else                   torque = 0;  // If we're not in FWD or REV default to no torque.
 
-  // Hard cut torque if MG1 is overspeed
-  if ((mg1_speed > MAX_SPEED) || (-mg1_speed > MAX_SPEED)) torque = 0;
+  // Hard cut torque if MG1 is overspeed - Commented out for testing purposes
+  //if ((mg1_speed > MAX_SPEED) || (-mg1_speed > MAX_SPEED)) torque = 0;
 
   // MG1 torque is set to MG2 * 1.25.
   mg2_torque = torque;
